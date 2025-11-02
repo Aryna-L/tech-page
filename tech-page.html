@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vocaloid Operation - Technical Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./tech-page.css">
+  </head>
+  <body>
+    <input type="checkbox" id="nav-toggle" hidden>
+    <label for="nav-toggle" id="toggle-label">☰ Menu</label>
+
+    <nav id="navbar">
+      <header>Vocaloid Operation</header>
+      <a href="#Introduction" class="nav-link">Introduction</a>
+      <a href="#Setup_and_Requirements" class="nav-link">Setup and Requirements</a>
+      <a href="#Interface_Overview" class="nav-link">Interface Overview</a>
+      <a href="#Synthesis_Workflow" class="nav-link">Synthesis Workflow</a>
+      <a href="#Tips_and_Humanization" class="nav-link">Tips and Humanization</a>
+      <a href="#Troubleshooting_and_Performance" class="nav-link">Troubleshooting and Performance</a>
+      <a href="#Advanced_Techniques" class="nav-link">Advanced Techniques</a>
+    </nav>
+
+    <main id="main-doc">
+      <section class="main-section" id="Introduction">
+        <header><h2>Introduction</h2></header>
+        <p>This documentation explains the technical operation of a Vocaloid-style vocal synthesis system. It guides users through setup, workflow, and advanced use.</p>
+        <p>Each section is structured to reflect the real usage stages of the software from installation to rendering and export.</p>
+      </section>
+
+      <section class="main-section" id="Setup_and_Requirements">
+        <header><h2>Setup and Requirements</h2></header>
+        <p>Ensure your system meets or exceeds the recommended requirements for optimal performance.</p>
+        <ul>
+          <li>Windows 10+, macOS 10.15+, or Linux (audio configured)</li>
+          <li>CPU: 4 cores minimum, 8+ recommended</li>
+          <li>RAM: 8 GB minimum, 16 GB+ preferred</li>
+          <li>SSD storage for sample streaming</li>
+        </ul>
+        <p>Installation process:</p>
+        <pre><code>1. Install the main application package.
+2. Place voicebanks in the user data folder.
+3. Point the software to your voicebank directory.
+4. Configure your audio driver and test MIDI.</code></pre>
+        <p>After installation, restart the host application to register voicebanks.</p>
+      </section>
+
+      <section class="main-section" id="Interface_Overview">
+        <header><h2>Interface Overview</h2></header>
+        <p>The main interface includes several tools for arranging and modifying vocal data.</p>
+        <ul>
+          <li>Track List – manages multiple vocal lines</li>
+          <li>Phrase Editor – adjusts note timing and lyric tokens</li>
+          <li>Parameter Lanes – edit pitch, dynamics, breath, and vibrato</li>
+        </ul>
+        <p>Example key commands:</p>
+        <pre><code>Ctrl + S : Save project
+Space : Play / Stop
+Shift + Drag : Duplicate note</code></pre>
+        <p>These shortcuts can be customized under the preferences tab.</p>
+      </section>
+
+      <section class="main-section" id="Synthesis_Workflow">
+        <header><h2>Synthesis Workflow</h2></header>
+        <p>The workflow begins with melody composition and ends with rendered output.</p>
+        <ol>
+          <li>Create melody and lyrics</li>
+          <li>Select voicebank</li>
+          <li>Tune pronunciation and timing</li>
+          <li>Adjust performance parameters</li>
+          <li>Render to WAV</li>
+        </ol>
+        <p>Example render command:</p>
+        <pre><code>vocaloid-cli render --project song.vproj --voice "Artist_VB" --out final.wav</code></pre>
+        <p>Automated batch rendering can improve productivity for multi-track projects.</p>
+      </section>
+
+      <section class="main-section" id="Tips_and_Humanization">
+        <header><h2>Tips and Humanization</h2></header>
+        <p>Realistic vocals require subtle performance imperfections.</p>
+        <ul>
+          <li>Apply timing offsets between vowels and consonants</li>
+          <li>Randomize dynamics by small percentages</li>
+          <li>Add variation to breathiness per phrase</li>
+          <li>Layer slightly detuned copies for harmony</li>
+        </ul>
+        <pre><code>// Example pseudo-automation curve
+pitchbend: smooth(0, +25, -10)
+dynamics: random(0.95, 1.05)</code></pre>
+        <p>These micro-adjustments give a more organic feel to synthetic voices.</p>
+      </section>
+
+      <section class="main-section" id="Troubleshooting_and_Performance">
+        <header><h2>Troubleshooting and Performance</h2></header>
+        <p>Below are frequent user issues and resolutions.</p>
+        <ul>
+          <li>Audio clipping – lower master gain or disable limiter</li>
+          <li>Lagging playback – increase buffer size</li>
+          <li>Pronunciation errors – edit phoneme mapping</li>
+          <li>CPU overload – enable offline render mode</li>
+        </ul>
+        <pre><code>// Adjust buffer size
+Audio > Preferences > Buffer Size > 512 samples</code></pre>
+        <p>Optimizing your buffer and thread count can prevent dropouts.</p>
+      </section>
+
+      <section class="main-section" id="Advanced_Techniques">
+        <header><h2>Advanced Techniques</h2></header>
+        <p>Professional workflows often combine multiple synthesis methods.</p>
+        <ul>
+          <li>Extend phoneme library for dialect variations</li>
+          <li>Integrate AI-based vocoders for smoother transitions</li>
+          <li>Automate projects using the application API</li>
+          <li>Embed synthesis in digital audio workstations</li>
+        </ul>
+        <pre><code>import vocaloid_api as vc
+vc.load_project('mysong.vproj')
+vc.render(output='mysong_final.wav')</code></pre>
+        <p>These techniques expand flexibility and control in production pipelines.</p>
+      </section>
+
+      <footer>
+        <p>Last updated: 2025-11-02</p>
+      </footer>
+    </main>
+  </body>
+</html>

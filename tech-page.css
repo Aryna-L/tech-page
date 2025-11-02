@@ -1,0 +1,203 @@
+:root {
+  --background: #0f1724;
+  --text: #e6eef6;
+  --accent: #7dd3fc;
+  --muted: #9aa4b2;
+  --nav-width: 250px;
+}
+
+/* Base styling */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background-color: var(--background);
+  line-height: 1.6;
+}
+
+/* ===== Sidebar Toggle Button ===== */
+#toggle-label {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #08111a;
+  color: var(--accent);
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background-color 0.2s;
+  border: none;
+}
+
+#toggle-label:hover {
+  background-color: #0b1726;
+}
+
+/* ===== Sidebar (Navbar) ===== */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--nav-width);
+  background-color: #08111a;
+  padding: 20px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+#navbar header {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-top: 45px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.nav-link {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+  margin: 8px 0;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+/* ===== Toggle Logic (Checkbox Hack) ===== */
+
+/* Hide sidebar by default when checkbox unchecked */
+#nav-toggle:not(:checked) ~ #navbar {
+  transform: translateX(-100%);
+}
+
+/* Show sidebar when checked */
+#nav-toggle:checked ~ #navbar {
+  transform: translateX(0);
+}
+
+/* Adjust main-doc margin when sidebar hidden */
+#nav-toggle:not(:checked) ~ #main-doc {
+  margin-left: 0;
+  width: 100%;
+}
+
+/* Restore margin when sidebar visible */
+#nav-toggle:checked ~ #main-doc {
+  margin-left: var(--nav-width);
+  width: calc(100% - var(--nav-width));
+}
+
+/* ===== Main Documentation Section ===== */
+#main-doc {
+  margin-left: var(--nav-width);
+  padding: 40px;
+  width: calc(100% - var(--nav-width));
+  max-width: none; /* allows full width */
+  box-sizing: border-box;
+}
+
+.main-section {
+  margin-bottom: 40px;
+  background: #0b1220;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.main-section h2 {
+  color: var(--accent);
+  margin-top: 0;
+}
+
+code, pre {
+  background: #05131a;
+  color: #cde7ff;
+  padding: 10px;
+  border-radius: 6px;
+  display: block;
+  overflow-x: auto;
+  font-family: monospace;
+}
+
+ul, ol {
+  margin-left: 20px;
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ===== Responsive Behavior (Improved) ===== */
+
+/* Sidebar default: hidden until toggled */
+#nav-toggle:not(:checked) ~ #navbar {
+  transform: translateX(-100%);
+}
+
+/* Sidebar visible: pushes content */
+#nav-toggle:checked ~ #navbar {
+  transform: translateX(0);
+}
+
+#nav-toggle:checked ~ #main-doc {
+  margin-left: var(--nav-width);
+  width: calc(100% - var(--nav-width));
+}
+
+/* Ensure main content always shifts correctly */
+#main-doc {
+  transition: margin-left 0.3s ease;
+}
+
+/* Button always visible */
+#toggle-label {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1002;
+}
+
+/* Adjust layout for large screens */
+@media (min-width: 900px) {
+  #navbar {
+    transform: translateX(0);
+  }
+
+  #main-doc {
+    margin-left: var(--nav-width);
+    width: calc(100% - var(--nav-width));
+  }
+
+  /* Keep button visible but subtle on desktop */
+  #toggle-label {
+    opacity: 0.7;
+  }
+
+  #nav-toggle:not(:checked) ~ #navbar {
+    transform: translateX(-100%);
+  }
+}
+
+/* Mobile: sidebar overlays content */
+@media (max-width: 899px) {
+  #nav-toggle:not(:checked) ~ #navbar {
+    transform: translateX(-100%);
+  }
+
+  #nav-toggle:checked ~ #navbar {
+    transform: translateX(0);
+    box-shadow: 2px 0 12px rgba(0,0,0,0.4);
+  }
+
+  #nav-toggle:checked ~ #main-doc {
+    margin-left: 0;
+  }
+}
