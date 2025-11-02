@@ -6,36 +6,35 @@
   --nav-width: 250px;
 }
 
-/* Base styling */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: var(--text);
   background-color: var(--background);
   line-height: 1.6;
+  box-sizing: border-box;
 }
 
-/* ===== Sidebar Toggle Button ===== */
 #toggle-label {
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: 15px;
+  left: 15px;
   background-color: #08111a;
   color: var(--accent);
   font-size: 1.2rem;
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
-  z-index: 1001;
-  transition: background-color 0.2s;
+  z-index: 1002;
+  transition: background-color 0.2s, opacity 0.3s;
   border: none;
+  opacity: 1;
 }
 
 #toggle-label:hover {
   background-color: #0b1726;
 }
 
-/* ===== Sidebar (Navbar) ===== */
 #navbar {
   position: fixed;
   top: 0;
@@ -70,37 +69,30 @@ body {
   color: var(--accent);
 }
 
-/* ===== Toggle Logic (Checkbox Hack) ===== */
-
-/* Hide sidebar by default when checkbox unchecked */
 #nav-toggle:not(:checked) ~ #navbar {
   transform: translateX(-100%);
 }
 
-/* Show sidebar when checked */
 #nav-toggle:checked ~ #navbar {
   transform: translateX(0);
 }
 
-/* Adjust main-doc margin when sidebar hidden */
 #nav-toggle:not(:checked) ~ #main-doc {
   margin-left: 0;
   width: 100%;
 }
 
-/* Restore margin when sidebar visible */
 #nav-toggle:checked ~ #main-doc {
   margin-left: var(--nav-width);
   width: calc(100% - var(--nav-width));
 }
 
-/* ===== Main Documentation Section ===== */
 #main-doc {
   margin-left: var(--nav-width);
   padding: 40px;
   width: calc(100% - var(--nav-width));
-  max-width: none; /* allows full width */
-  box-sizing: border-box;
+  max-width: none;
+  transition: margin-left 0.3s ease;
 }
 
 .main-section {
@@ -135,37 +127,6 @@ footer {
   color: var(--muted);
 }
 
-/* ===== Responsive Behavior (Improved) ===== */
-
-/* Sidebar default: hidden until toggled */
-#nav-toggle:not(:checked) ~ #navbar {
-  transform: translateX(-100%);
-}
-
-/* Sidebar visible: pushes content */
-#nav-toggle:checked ~ #navbar {
-  transform: translateX(0);
-}
-
-#nav-toggle:checked ~ #main-doc {
-  margin-left: var(--nav-width);
-  width: calc(100% - var(--nav-width));
-}
-
-/* Ensure main content always shifts correctly */
-#main-doc {
-  transition: margin-left 0.3s ease;
-}
-
-/* Button always visible */
-#toggle-label {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  z-index: 1002;
-}
-
-/* Adjust layout for large screens */
 @media (min-width: 900px) {
   #navbar {
     transform: translateX(0);
@@ -176,17 +137,11 @@ footer {
     width: calc(100% - var(--nav-width));
   }
 
-  /* Keep button visible but subtle on desktop */
   #toggle-label {
     opacity: 0.7;
   }
-
-  #nav-toggle:not(:checked) ~ #navbar {
-    transform: translateX(-100%);
-  }
 }
 
-/* Mobile: sidebar overlays content */
 @media (max-width: 899px) {
   #nav-toggle:not(:checked) ~ #navbar {
     transform: translateX(-100%);
